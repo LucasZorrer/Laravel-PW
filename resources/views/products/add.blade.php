@@ -3,7 +3,13 @@
 @section('title', 'Produtos Adicionar')
 
 @section('content')
-    <h2>Adicione seu produto</h2>.
+    <h2>Adicione seu produto</h2>
+
+    @if ($errors)
+        @foreach ($errors->all() as $error)
+                {{  $error }}
+        @endforeach
+    @endif
 
     <form action="{{ route('produtos.addSave') }}" method="POST">
         @csrf
