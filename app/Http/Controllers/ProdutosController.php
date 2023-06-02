@@ -31,8 +31,8 @@ class ProdutosController extends Controller
         return redirect()->route('produtos');
     }
 
-    public function view()
+    public function view(Produto $produto)
     {
-
+        return view('products/view', ["produto" => $produto]);
     }
 }

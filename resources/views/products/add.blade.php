@@ -13,11 +13,11 @@
 
     <form action="{{ route('produtos.addSave') }}" method="POST">
         @csrf
-        <input type="text" name="name" placeholder="Nome do Produto">
+        <input type="text" name="name" placeholder="Nome do Produto" value="{{ old('name') }}">
         <br>
-        <input type="text" name="price" min="0" step="0.01" placeholder="Preço do Produto">
+        <input type="text" name="price" min="0" step="0.01" placeholder="Preço do Produto" value="{{ old('price') }}">
         <br>
-        <input type="number" name="quantity" placeholder="Quantidade">
+        <input type="number" name="quantity" placeholder="Quantidade" value="{{ old('quantity') }}">
         <hr>
         <button type="submit">Adicionar Produto</button>
     </form>
