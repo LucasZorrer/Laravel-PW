@@ -2,6 +2,10 @@
 
 @section('title', 'Produtos')
 
+@if (session('sucesso'))
+    <div>{{ session('sucesso') }}</div>
+@endif
+
 @section('content')
 
     <table border="1" style=" border-collapse: collapse; text-align: center; width: 50%;">
