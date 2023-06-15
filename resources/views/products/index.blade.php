@@ -7,13 +7,13 @@
 @endif
 
 @section('content')
-
     <table border="1" style=" border-collapse: collapse; text-align: center; width: 50%;">
         <tr>
             <th>Nome</th>
             <th>Preço</th>
             <th>Quantidade</th>
             <th>Editar</th>
+            <th>Apagar</th>
         </tr>
 
         @foreach ($prods as $prod)
@@ -22,6 +22,7 @@
                 <td>R$ {{ number_format($prod->price, 2, ',', '.') }}</td>
                 <td>{{ $prod->quantity }} </td>
                 <td><a href="{{ route('produtos.edit', [$prod->id]) }}">Editar</a></td>
+                <td><a href="{{ route('produtos.delete', [$prod->id]) }}">Remover</a></td>
             </tr>
         @endforeach
     </table>
