@@ -2,11 +2,18 @@
 
 @section('title', 'Produtos')
 
+@section('content')
+
 @if (session('sucesso'))
     <div>{{ session('sucesso') }}</div>
 @endif
 
-@section('content')
+<form action="{{ route('produtos') }}" method="POST">
+    @csrf
+    <input type="text" name="busca">
+    <input type="submit" value="Buscar">
+</form>
+
     <table border="1" style=" border-collapse: collapse; text-align: center; width: 50%;">
         <tr>
             <th>Nome</th>

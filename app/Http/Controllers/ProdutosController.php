@@ -8,9 +8,14 @@ use Illuminate\Validation\Rule;
 
 class ProdutosController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $prods = Produto::all();
+        if ($request->isMethod('POST')) {
+            $busca = $request->busca;
+            $prods = Produto::where('name', 'LIKE', "%{$busca}%")->get();
+        } else {
+            $prods = Produto::all();
+        }
         return view('products.index', ['prods' => $prods]);
     }
 
@@ -57,13 +62,15 @@ class ProdutosController extends Controller
         return view('products/view', ["produto" => $produto]);
     }
 
-    public function delete(Produto $produto){
-        return view('products.delete',[
+    public function delete(Produto $produto)
+    {
+        return view('products.delete', [
             'produto' => $produto,
         ]);
     }
 
-    public function deleteForReal(Produto $produto){
+    public function deleteForReal(Produto $produto)
+    {
         $produto->delete();
 
         return redirect()->route('produtos')->with('sucesso', 'Produto apagado com sucesso');
