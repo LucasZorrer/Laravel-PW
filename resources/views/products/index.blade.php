@@ -11,6 +11,10 @@
 <form action="{{ route('produtos') }}" method="POST">
     @csrf
     <input type="text" name="busca">
+    <select name="ord">
+        <option value="asc">Crescente</option>
+        <option value="desc">Decrescente</option>
+    </select>
     <input type="submit" value="Buscar">
 </form>
 
