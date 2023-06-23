@@ -1,0 +1,13 @@
+body {
+    background-color: peru;
+}
+
+.pagination {
+    border: 2px dashed pink;
+}
+
+li {
+    float: left;
+    list-style-type: none;
+    padding: 0 20px;
+}

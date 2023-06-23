@@ -37,6 +37,7 @@
             </tr>
         @endforeach
     </table>
+    {{  $prods->links('pagination::default') }}
 
     <a href="{{ route('produtos.add') }}">Adicionar Produto</a>
 @endsection
