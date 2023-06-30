@@ -9,4 +9,7 @@
     <p>
         <a href="{{ route('produtos') }}">Voltar</a>
     </p>
+    <p>
+        <a href="{{ route('users.listAll') }}">Voltar</a>
+    </p>
 @endsection
