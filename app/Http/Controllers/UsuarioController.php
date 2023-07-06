@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -24,8 +25,11 @@ class UsuarioController extends Controller
 
         $dados['password'] = Hash::make($dados['password']);
 
-        Usuario::create($dados);
-        return redirect()->route('usuarios.listAll')->with('sucesso', 'Usuário inserido com sucesso');
+        $user = Usuario::create($dados);
+
+        event(new Registered($user));
+
+        return redirect()->route('usuarios.listAll');
     }
 
     public function listAll()
@@ -53,7 +57,8 @@ class UsuarioController extends Controller
         return view('users.login');
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
 
         return redirect()->route('home');

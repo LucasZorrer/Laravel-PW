@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UsuarioController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutosController;
 
@@ -18,7 +19,7 @@ Route::post('/produtos/edit/{produto}', [ProdutosController::class, 'editSave'])
 Route::get('/produtos/delete/{produto}', [ProdutosController::class, 'delete'])->name('produtos.delete');
 Route::delete('/produtos/delete/{produto}', [ProdutosController::class, 'deleteForReal'])->name('produtos.deleteForReal');
 
-Route::prefix('/usuarios')->group(function(){
+Route::prefix('/usuarios')->group(function () {
     Route::get('/cadastrar', [UsuarioController::class, 'index'])->name('usuarios.index');
     Route::post('/cadastrar', [UsuarioController::class, 'cadastrar'])->name('usuarios.cadastrar');
     Route::get('/usuarios', [UsuarioController::class, 'listAll'])->name('usuarios.listAll');
@@ -28,3 +29,12 @@ Route::prefix('/usuarios')->group(function(){
 })->middleware('auth');
 
 
+Route::get('/email/verify', function(){
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+
+Route::get('/email/verify/{id}/{hash}', function(EmailVerificationRequest $request){
+    $request->fulfill();
+    return redirect()->route('home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
